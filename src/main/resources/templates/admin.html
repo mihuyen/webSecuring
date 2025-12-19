@@ -1,15 +1,29 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
-<body>
-    <h1>Admin Panel</h1>
-    <p>This page is only accessible to administrators.</p>
-    <a th:href="@{/}">Back to Home</a>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</body>
-</html>
 
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 style="color: #ef4444;">Admin Panel</h1>
+            <p class="text-center" style="margin-bottom: 2rem;">
+                This secure area is only accessible to users with the <span class="admin-badge">ADMIN</span> role.
+            </p>
+
+            <div class="form-group">
+                <a th:href="@{/}" class="btn"
+                    style="background-color: transparent; border: 1px solid var(--text-color); color: var(--text-color);">Back
+                    to Home</a>
+            </div>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn">Sign Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

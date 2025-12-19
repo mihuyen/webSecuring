@@ -1,22 +1,34 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Welcome</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <h1>Welcome!</h1>
-    <div sec:authorize="isAuthenticated()">
-        <p>Welcome <span sec:authentication="name"></span></p>
-        <div sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/admin}">Admin Panel</a>
+    <div class="container">
+        <div class="card welcome-section">
+            <h1>Welcome!</h1>
+            
+            <div sec:authorize="isAuthenticated()">
+                <p>Hello, <strong sec:authentication="name" class="text-primary"></strong>!</p>
+                
+                <div sec:authorize="hasRole('ADMIN')" class="mt-4">
+                    <a th:href="@{/admin}" class="btn" style="background-color: #ef4444;">Access Admin Panel</a>
+                </div>
+                
+                <form th:action="@{/logout}" method="post" class="mt-4">
+                    <button type="submit" class="btn">Sign Out</button>
+                </form>
+            </div>
+            
+            <div sec:authorize="!isAuthenticated()">
+                <div class="form-group">
+                    <a th:href="@{/login}" class="btn">Login</a>
+                </div>
+                <div class="form-group">
+                    <a th:href="@{/register}" class="btn" style="background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">Register</a>
+                </div>
+            </div>
         </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
-    <div sec:authorize="!isAuthenticated()">
-        <p><a th:href="@{/login}">Login</a></p>
-        <p><a th:href="@{/register}">Register</a></p>
     </div>
 </body>
 </html>
